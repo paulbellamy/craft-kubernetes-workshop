@@ -12,9 +12,6 @@ spec:
         provider: load
     spec:
       containers:
-      - name: root
+      - name: load
         image: tutum/curl
-        command: ["bash",  "-c", "while true; do curl -s --insecure https://frontend; sleep 1; done"]
-      - name: login
-        image: tutum/curl
-        command: ["bash",  "-c", "while true; do curl -s --insecure https://frontend/login; sleep 1; done"]
+        command: ["bash",  "-c", "while true; do curl -s --insecure https://frontend; curl -s --insecure https://frontend/login; sleep 1; done"]
