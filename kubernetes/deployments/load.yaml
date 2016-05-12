@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: load
+  labels:
+    provider: load
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        provider: load
+    spec:
+      containers:
+      - name: root
+        image: tutum/curl
+        command: ["bash",  "-c", "while true; do curl -s --insecure https://frontend; sleep 1; done"]
+      - name: login
+        image: tutum/curl
+        command: ["bash",  "-c", "while true; do curl -s --insecure https://frontend/login; sleep 1; done"]
